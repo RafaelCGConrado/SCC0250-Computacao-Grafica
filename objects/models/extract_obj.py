@@ -15,5 +15,3 @@ with open("bobesp.obj", "r") as f:
         if line.startswith("f "):
             for num in [int(x) for x in line[2:].strip().split(" ")]:
                 objects[curr_object].append(temp_verticies[num - 1])
-
-print(f"model = {objects}")

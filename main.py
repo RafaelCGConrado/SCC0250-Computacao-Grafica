@@ -4,8 +4,7 @@ import OpenGL.GL.shaders
 import numpy as np
 import glm
 import math
-from sponge import SpongeBob
-from models import sponge_bob
+from objects.spongebob import SpongeBob
 
 def init_window():
     glfw.init()
@@ -76,7 +75,7 @@ def main():
     vertices_list = []
 
     # Load Object
-    bob = SpongeBob(model=sponge_bob)
+    bob = SpongeBob()
     vertices_list = bob.load(vertices_list)
 
     vertices = np.zeros(len(vertices_list), [("position", np.float32, 3)])
