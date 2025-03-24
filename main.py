@@ -4,19 +4,12 @@ import OpenGL.GL.shaders
 import numpy as np
 import glm
 import math
-from sponge import SpongeBob
+from object3d import Object3d
+from models import sponge_bob
 
-def bind_verticies_from_model(verticies_list, model_verticies):
-    init = len(verticies_list)
-
-    for v in model_verticies:
-        verticies_list.append(v)
-
-    return verticies_list
-
-def main():
+def init_window():
     glfw.init()
-    glfw.window_hint(glfw.VISIBLE, glfw.FALSE);
+    glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
     window = glfw.create_window(700, 700, "Programa", None, None)
 
     if (window == None):
@@ -25,6 +18,25 @@ def main():
         
     glfw.make_context_current(window)
 
+    return window
+
+def create_shader(code, shader_type):
+    shader = glCreateShader(shader_type)
+    glShaderSource(shader, code)
+
+    return shader
+
+def compile_shader(shader):
+    glCompileShader(shader)
+    if not glGetShaderiv(shader, GL_COMPILE_STATUS):
+        error = glGetShaderInfoLog(vertex).decode()
+        print(error)
+        raise RuntimeError(f"Erro de compilacao do {vertex} Shader")
+ 
+
+def main():
+    window = init_window()
+    
     vertex_code = """
             attribute vec3 position;
             uniform mat4 mat_transformation;
@@ -42,26 +54,13 @@ def main():
             """
 
     # Request a program and shader slots from GPU
-    program  = glCreateProgram()
-    vertex   = glCreateShader(GL_VERTEX_SHADER)
-    fragment = glCreateShader(GL_FRAGMENT_SHADER)
-
-    # Set shaders source
-    glShaderSource(vertex, vertex_code)
-    glShaderSource(fragment, fragment_code)
-
-    # Compile shaders
-    glCompileShader(vertex)
-    if not glGetShaderiv(vertex, GL_COMPILE_STATUS):
-        error = glGetShaderInfoLog(vertex).decode()
-        print(error)
-        raise RuntimeError("Erro de compilacao do Vertex Shader")
-
-    glCompileShader(fragment)
-    if not glGetShaderiv(fragment, GL_COMPILE_STATUS):
-        error = glGetShaderInfoLog(fragment).decode()
-        print(error)
-        raise RuntimeError("Erro de compilacao do Fragment Shader")
+    program = glCreateProgram()
+    
+    vertex = create_shader(vertex_code, GL_VERTEX_SHADER)
+    fragment = create_shader(fragment_code, GL_FRAGMENT_SHADER)
+    
+    compile_shader(vertex)
+    compile_shader(fragment)
 
     # Attach shader objects to the program
     glAttachShader(program, vertex)
@@ -77,16 +76,13 @@ def main():
     vertices_list = []
 
     # Load Object
-    bob = SpongeBob()
-    bob.load(vertices_list)
+    bob = Object3d(model=sponge_bob, position=(0.5, 1))
+    vertices_list = bob.load(vertices_list)
 
     vertices = np.zeros(len(vertices_list), [("position", np.float32, 3)])
     vertices['position'] = vertices_list
 
-    print(vertices_list)
-
     buffer_VBO = glGenBuffers(1)
-
     # Upload data
     glBindBuffer(GL_ARRAY_BUFFER, buffer_VBO)
     glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
