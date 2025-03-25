@@ -33,6 +33,17 @@ def compile_shader(shader):
         print(error)
         raise RuntimeError(f"Erro de compilacao do {vertex} Shader")
  
+def load_objects():
+    objects = [
+        SpongeBob(),
+        Floor()
+    ]
+
+    vertices_list = []
+    for obj in objects:
+        vertices_list = obj.load(vertices_list)
+
+    return objects, vertices_list
 
 def main():
     window = init_window()
@@ -70,22 +81,16 @@ def main():
     if not glGetProgramiv(program, GL_LINK_STATUS):
         print(glGetProgramInfoLog(program))
         raise RuntimeError('Linking error')
-        
     glUseProgram(program)
 
-    vertices_list = []
-
-    # Load Object
-    bob = SpongeBob()
-    floor = Floor()
-    vertices_list = bob.load(vertices_list)
-    vertices_list = floor.load(vertices_list)
+    # Load objects and vertices list
+    objects, vertices_list = load_objects()
 
     vertices = np.zeros(len(vertices_list), [("position", np.float32, 3)])
     vertices['position'] = vertices_list
 
-    buffer_VBO = glGenBuffers(1)
     # Upload data
+    buffer_VBO = glGenBuffers(1)
     glBindBuffer(GL_ARRAY_BUFFER, buffer_VBO)
     glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
     stride = vertices.strides[0]
@@ -97,8 +102,8 @@ def main():
     loc_color = glGetUniformLocation(program, "color")
     
     def key_event(window,key,scancode,action,mods):
-        bob.key_event(key)
-        floor.key_event(key)
+        for obj in objects:
+            obj.key_event(key)
 
     glfw.set_key_callback(window,key_event)
 
@@ -111,9 +116,10 @@ def main():
     while not glfw.window_should_close(window):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
         glClearColor(0.2, 0.5, 1.0, 1.0)
-
-        floor.draw(program, loc_color)
-        bob.draw(program, loc_color)
+        
+        for obj in objects:
+            obj.draw(program, loc_color)
+        
         glfw.swap_buffers(window)
         glfw.poll_events()
 
