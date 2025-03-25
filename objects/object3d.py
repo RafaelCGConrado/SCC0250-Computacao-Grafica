@@ -5,7 +5,7 @@ from .utils import multiplica_matriz
 import abc
 
 class Object3d(object):
-    def __init__(self, model, position=[0, 0, 0], angles=[0, 0, 0], scale=0.2):    
+    def __init__(self, model, position=[0, 0, 0], angles=[0, 0, 0], scale=1):    
         self.model = model
 
         self.init = {x: 0 for x in self.model}
@@ -93,5 +93,5 @@ class Object3d(object):
         for piece in self.model['color']:
             rgb = self.model['color'][piece]
             glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], 1.0) ### vermelho    
-            glDrawArrays(GL_TRIANGLES, self.init[piece], self.len[piece])
+            glDrawArrays(GL_TRIANGLE_STRIP, self.init[piece], self.len[piece])
     

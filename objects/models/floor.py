@@ -1,13 +1,8 @@
+from .primitives import square
+
 floor = {
     "vertices": {
-        "body" : [
-            (-5, -5, 0), 
-            (5, -5, 0), 
-            (-5, 5, 0),
-            (5, -5, 0), 
-            (-5, 5, 0),
-            (5, 5, 0),
-        ]
+        "body": square(1, 1)
            
     },
     "color": {

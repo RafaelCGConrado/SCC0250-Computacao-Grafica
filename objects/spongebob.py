@@ -5,7 +5,7 @@ from .models.spongebob import sponge_bob
 
 class SpongeBob(Object3d):
     def __init__(self):
-        super().__init__(model=sponge_bob)
+        super().__init__(model=sponge_bob, scale=0.3)
 
     def key_event(self, key):
         if key == 262: self.position[0] += 0.01 #esquerda
