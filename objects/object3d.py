@@ -10,8 +10,8 @@ class Object3d(object):
 
         self.init = {x: 0 for x in self.model}
         self.len = {x: 0 for x in self.model}
-        self.angles = angles
-        self.position = position
+        self.angles = angles.copy()
+        self.position = position.copy()
         self.scale = scale
 
         self.mat_transform = np.array([

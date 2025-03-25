@@ -7,8 +7,9 @@ class Floor(Object3d):
     def __init__(self):
         super().__init__(
             model=floor, 
-            position=[0, -0.5, 0], 
-            angles=[np.pi/2 - 0.7, 0, 0]
+            position=[0, -0.5, 0.5], 
+            angles=[np.pi/4, 0, 0],
+            scale=2
         )
     
 
