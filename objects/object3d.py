@@ -5,7 +5,7 @@ from .utils import multiplica_matriz
 import abc
 
 class Object3d(object):
-    def __init__(self, model, position=[0, 0], angles=[0, 0, 0], scale=0.2):    
+    def __init__(self, model, position=[0, 0, 0], angles=[0, 0, 0], scale=0.2):    
         self.model = model
 
         self.init = {x: 0 for x in self.model}
@@ -13,6 +13,13 @@ class Object3d(object):
         self.angles = angles
         self.position = position
         self.scale = scale
+
+        self.mat_transform = np.array([
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        ], np.float32)
 
     @abc.abstractmethod
     def key_event(self):
@@ -42,10 +49,12 @@ class Object3d(object):
         sin_d_x = math.sin(self.angles[0])
         cos_d_y = math.cos(self.angles[1])
         sin_d_y = math.sin(self.angles[1])
+        cos_d_z = math.cos(self.angles[2])
+        sin_d_z = math.sin(self.angles[2])
         
-        mat_rotate_x = np.array([
-            cos_d_x, -sin_d_x, 0, 0,
-            sin_d_x, cos_d_x, 0, 0,
+        mat_rotate_z = np.array([
+            cos_d_z, -sin_d_z, 0, 0,
+            sin_d_z, cos_d_z, 0, 0,
             0, 0, 1, 0,
             0, 0, 0, 1,
         ], np.float32)
@@ -56,6 +65,13 @@ class Object3d(object):
             sin_d_y, 0, cos_d_y, 0,
             0, 0, 0, 1,
         ], np.float32)
+
+        mat_rotate_x = np.array([
+            1, 0, 0, 0,
+            0, cos_d_x, -sin_d_x, 0,
+            0, sin_d_x, cos_d_x, 0,
+            0, 0, 0, 1,
+        ], np.float32)
         
         mat_scale = np.array([     self.scale,  0.0, 0.0,     0, 
                                         0.0,    self.scale,   0.0, 0, 
@@ -64,15 +80,15 @@ class Object3d(object):
 
         mat_position = np.array([     1,  0.0, 0.0,     self.position[0], 
                                         0.0,    1,   0.0, self.position[1], 
-                                        0.0,    0.0,   1, 0.0, 
+                                        0.0,    0.0,   1, self.position[2], 
                                         0.0,    0.0,   0.0, 1.0], np.float32)
 
-        mat_transform = multiplica_matriz(mat_rotate_y, mat_rotate_x)
-        mat_transform = multiplica_matriz(mat_scale, mat_transform)
-        mat_transform = multiplica_matriz(mat_position, mat_transform)
-        
+        self.mat_transform = multiplica_matriz(mat_rotate_y, mat_rotate_z)
+        self.mat_transform = multiplica_matriz(mat_rotate_x, self.mat_transform)
+        self.mat_transform = multiplica_matriz(mat_scale, self.mat_transform)
+        self.mat_transform = multiplica_matriz(mat_position, self.mat_transform)
         loc_transformation = glGetUniformLocation(program, "mat_transformation")
-        glUniformMatrix4fv(loc_transformation, 1, GL_TRUE, mat_transform) 
+        glUniformMatrix4fv(loc_transformation, 1, GL_TRUE, self.mat_transform) 
         
         for piece in self.model['color']:
             rgb = self.model['color'][piece]

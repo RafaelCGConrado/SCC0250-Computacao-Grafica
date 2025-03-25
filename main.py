@@ -5,6 +5,7 @@ import numpy as np
 import glm
 import math
 from objects.spongebob import SpongeBob
+from objects.floor import Floor
 
 def init_window():
     glfw.init()
@@ -76,7 +77,9 @@ def main():
 
     # Load Object
     bob = SpongeBob()
+    floor = Floor()
     vertices_list = bob.load(vertices_list)
+    vertices_list = floor.load(vertices_list)
 
     vertices = np.zeros(len(vertices_list), [("position", np.float32, 3)])
     vertices['position'] = vertices_list
@@ -95,6 +98,7 @@ def main():
     
     def key_event(window,key,scancode,action,mods):
         bob.key_event(key)
+        floor.key_event(key)
 
     glfw.set_key_callback(window,key_event)
 
@@ -108,8 +112,8 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
         glClearColor(0.2, 0.5, 1.0, 1.0)
 
+        floor.draw(program, loc_color)
         bob.draw(program, loc_color)
-        
         glfw.swap_buffers(window)
         glfw.poll_events()
 
