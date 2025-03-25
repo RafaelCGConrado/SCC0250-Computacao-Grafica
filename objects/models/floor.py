@@ -1,8 +1,8 @@
-from .primitives import square
+from . import primitives
 
 floor = {
     "vertices": {
-        "body": square(1, 1)
+        "body": primitives.square(1, 1)
            
     },
     "color": {

@@ -1,9 +1,9 @@
 import numpy as np
 import abc
-from .object3d import Object3d
+from . import object3d
 from .models.spongebob import sponge_bob
 
-class SpongeBob(Object3d):
+class SpongeBob(object3d.Object3d):
     def __init__(self):
         super().__init__(model=sponge_bob, scale=0.3)
 

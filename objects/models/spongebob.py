@@ -12,17 +12,17 @@ sponge_bob = {
     }
 }"""
 
-from .primitives import rectangle 
+from . import primitives 
 
 sponge_bob = {
     "vertices": {
-        "body": rectangle(0.5, 0.6, 0.2, y=0.2),
-        "arm1": rectangle(0.05, 0.4, 0.05, x=-0.55, y=-0.2),
-        "arm2": rectangle(0.05, 0.4, 0.05, x=0.55, y=-0.2),
-        "leg1": rectangle(0.05, 0.4, 0.05, x=0.25, y=-1),
-        "leg2": rectangle(0.05, 0.4, 0.05, x=-0.25, y=-1),
-        "pants1": rectangle(0.5, 0.05, 0.2, y=-0.45),
-        "pants2": rectangle(0.5, 0.1, 0.2, y=-0.6),
+        "body": primitives.rectangle(0.5, 0.6, 0.2, y=0.2),
+        "arm1": primitives.rectangle(0.05, 0.4, 0.05, x=-0.55, y=-0.2),
+        "arm2": primitives.rectangle(0.05, 0.4, 0.05, x=0.55, y=-0.2),
+        "leg1": primitives.rectangle(0.05, 0.4, 0.05, x=0.25, y=-1),
+        "leg2": primitives.rectangle(0.05, 0.4, 0.05, x=-0.25, y=-1),
+        "pants1": primitives.rectangle(0.5, 0.05, 0.2, y=-0.45),
+        "pants2": primitives.rectangle(0.5, 0.1, 0.2, y=-0.6),
     },
 
     "color": {
