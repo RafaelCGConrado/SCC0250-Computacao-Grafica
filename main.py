@@ -5,6 +5,7 @@ import numpy as np
 import glm
 import math
 from objects.spongebob import SpongeBob
+from objects.patrick import Patrick
 from objects.floor import Floor
 
 def init_window():
@@ -36,6 +37,7 @@ def compile_shader(shader):
 def load_objects():
     objects = [
         SpongeBob(),
+        Patrick(),
         Floor()
     ]
 
