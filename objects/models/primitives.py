@@ -42,6 +42,88 @@ def rectangle(w, h, d, x=0, y=0, z=0):
             (+w + x, +h + y, -d + z)]
 
 
+def piramid(w, h, d, x=0, y=0, z=0):
+    w, h, d = w/2, h/2, d/2
+    return [
+    # Face 1 da Piramide (triangulo)
+    (0.0, h, 0),
+    (+w, 0.0, -w),
+    (+w, 0.0, +w),
+
+    # Face 2 da Piramide (triangulo)
+    (0.0, h, 0),
+    (+w, 0.0, +w),
+    (-w, 0.0, +w),
+
+    # Face 3 da Piramide (triangulo)
+    (0.0, h, 0),
+    (-w, 0.0, +w),
+    (-w, 0.0, -w),
+    
+    # Face 4 da Piramide (triangulo)
+    (0.0, h, 0),
+    (-w, 0.0, -w),
+    (+w, 0.0, -w),
+    
+    # Face 5 (base) da Piramide (quadrado)
+    (+w, 0.0, +w),
+    (w, 0.0, -w),
+    (-w, 0.0, +w),
+    (-w, 0.0, -w)]
+
+def tronco_piramid(w, h, d, top_w, top_d, x=0, y=0, z=0):
+    w, h, d = w/2, h/2, d/2
+    top_w, top_d = top_w/2, top_d/2
+    return [
+    # Face 1 da Piramide (trapezio)
+    (0.0, h, 0),
+    (+w, 0.0, -w),
+    (+top_w, h, -top_d),
+
+    (0.0, h, 0),
+    (+top_w, h, -top_d),
+    (+top_w, h, +top_d),
+
+    # Face 2 do tronco da Piramide (trapezio)
+    (0.0, h, 0),
+    (+top_w, h, +top_d),
+    (-top_w, h, +top_d),
+
+    (0.0, h, 0),
+    (-top_w, h, +top_d),
+    (-w, 0.0, +w),
+
+    # Face 3 do tronco da Piramide (trapezio)
+    (0.0, h, 0),
+    (-w, 0.0, +w),
+    (-top_w, h, +top_d),
+
+    (0.0, h, 0),
+    (-top_w, h, +top_d),
+    (-top_w, h, -top_d),
+
+    # Face 4 do tronco da Piramide (trapezio)
+    (0.0, h, 0),
+    (-top_w, h, -top_d),
+    (+top_w, h, -top_d),
+
+    (0.0, h, 0),
+    (+top_w, h, -top_d),
+    (+w, 0.0, -w),
+    
+    # Face 5 (base) do tronco de piramide (quadrado de baixo)
+    (+w, 0.0, +w),
+    (w, 0.0, -w),
+    (-w, 0.0, +w),
+    (-w, 0.0, -w),
+    
+    # Face 6 (base) do tronco de piramide (quadrado de cima)
+    (+top_w, h, +top_d),
+    (+top_w, h, -top_d),
+    (-top_w, h, +top_d),
+    (-top_w, h, -top_d),
+    ]
+
 PI = 3.141592
 r = 0.1 # raio
 H = 0.9
