@@ -37,7 +37,7 @@ def compile_shader(shader):
  
 def load_objects():
     objects = [
-        #SpongeBob(),
+        SpongeBob(),
         Patrick(),
         Hook(),
         Floor()
