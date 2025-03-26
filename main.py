@@ -36,7 +36,7 @@ def compile_shader(shader):
  
 def load_objects():
     objects = [
-        SpongeBob(),
+        #SpongeBob(),
         Patrick(),
         Floor()
     ]
@@ -90,7 +90,7 @@ def main():
 
     vertices = np.zeros(len(vertices_list), [("position", np.float32, 3)])
     vertices['position'] = vertices_list
-
+    
     # Upload data
     buffer_VBO = glGenBuffers(1)
     glBindBuffer(GL_ARRAY_BUFFER, buffer_VBO)
