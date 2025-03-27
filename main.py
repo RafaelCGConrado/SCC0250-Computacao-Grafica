@@ -9,6 +9,8 @@ from objects.patrick import Patrick
 from objects.floor import Floor
 from objects.hook import Hook
 from objects.coral import Coral
+from objects.rock import Rock
+
 
 def init_window():
     glfw.init()
@@ -38,11 +40,12 @@ def compile_shader(shader):
  
 def load_objects():
     objects = [
-        SpongeBob(),
+      #  SpongeBob(),
         Patrick(),
         Hook(),
         Floor(),
-        Coral()
+        Coral(),
+        Rock()
     ]
 
     vertices_list = []

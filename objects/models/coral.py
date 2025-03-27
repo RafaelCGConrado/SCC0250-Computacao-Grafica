@@ -32,7 +32,7 @@ coral = {
         "coral2": coral_color,
         "coral3": coral_color,
         "coral4": coral_color,
-       # "coral5": coral_color,
+        "coral5": coral_color,
         #"coral6": coral_color
     }
 
