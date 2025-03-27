@@ -22,7 +22,7 @@ class Object3d(object):
         ], np.float32)
 
     @abc.abstractmethod
-    def key_event(self):
+    def key_event(self, key):
         return
 
     def load(self, vertices_list):
