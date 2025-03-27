@@ -43,33 +43,34 @@ def rectangle(w, h, d, x=0, y=0, z=0):
 
 
 def piramid(w, h, d, x=0, y=0, z=0):
-    w, h, d = w/2, h/2, d/2
+    w, h, d = w / 2, h / 2, d / 2
     return [
-    # Face 1 da Piramide (triangulo)
-    (0.0, h, 0),
-    (+w, 0.0, -w),
-    (+w, 0.0, +w),
+        # Face 1 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x + w, y + 0.0, z - d),
+        (x + w, y + 0.0, z + d),
 
-    # Face 2 da Piramide (triangulo)
-    (0.0, h, 0),
-    (+w, 0.0, +w),
-    (-w, 0.0, +w),
+        # Face 2 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x + w, y + 0.0, z + d),
+        (x - w, y + 0.0, z + d),
 
-    # Face 3 da Piramide (triangulo)
-    (0.0, h, 0),
-    (-w, 0.0, +w),
-    (-w, 0.0, -w),
-    
-    # Face 4 da Piramide (triangulo)
-    (0.0, h, 0),
-    (-w, 0.0, -w),
-    (+w, 0.0, -w),
-    
-    # Face 5 (base) da Piramide (quadrado)
-    (+w, 0.0, +w),
-    (w, 0.0, -w),
-    (-w, 0.0, +w),
-    (-w, 0.0, -w)]
+        # Face 3 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x - w, y + 0.0, z + d),
+        (x - w, y + 0.0, z - d),
+
+        # Face 4 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x - w, y + 0.0, z - d),
+        (x + w, y + 0.0, z - d),
+
+        # Face 5 (base) da Pirâmide (quadrado)
+        (x + w, y + 0.0, z + d),
+        (x + w, y + 0.0, z - d),
+        (x - w, y + 0.0, z + d),
+        (x - w, y + 0.0, z - d),
+    ]
 
 def tronco_piramide(w_base, h, d_base, w_top, d_top, x=0, y=0, z=0):
     w_base, h, d_base = w_base/2, h/2, d_base/2

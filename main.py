@@ -8,6 +8,7 @@ from objects.spongebob import SpongeBob
 from objects.patrick import Patrick
 from objects.floor import Floor
 from objects.hook import Hook
+from objects.coral import Coral
 
 def init_window():
     glfw.init()
@@ -40,7 +41,8 @@ def load_objects():
         SpongeBob(),
         Patrick(),
         Hook(),
-        Floor()
+        Floor(),
+        Coral()
     ]
 
     vertices_list = []
