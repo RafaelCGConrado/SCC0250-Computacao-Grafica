@@ -43,164 +43,98 @@ def rectangle(w, h, d, x=0, y=0, z=0):
 
 
 def piramid(w, h, d, x=0, y=0, z=0):
-    w, h, d = w/2, h/2, d/2
+    w, h, d = w / 2, h / 2, d / 2
     return [
-    # Face 1 da Piramide (triangulo)
-    (0.0, h, 0),
-    (+w, 0.0, -w),
-    (+w, 0.0, +w),
+        # Face 1 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x + w, y + 0.0, z - d),
+        (x + w, y + 0.0, z + d),
 
-    # Face 2 da Piramide (triangulo)
-    (0.0, h, 0),
-    (+w, 0.0, +w),
-    (-w, 0.0, +w),
+        # Face 2 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x + w, y + 0.0, z + d),
+        (x - w, y + 0.0, z + d),
 
-    # Face 3 da Piramide (triangulo)
-    (0.0, h, 0),
-    (-w, 0.0, +w),
-    (-w, 0.0, -w),
-    
-    # Face 4 da Piramide (triangulo)
-    (0.0, h, 0),
-    (-w, 0.0, -w),
-    (+w, 0.0, -w),
-    
-    # Face 5 (base) da Piramide (quadrado)
-    (+w, 0.0, +w),
-    (w, 0.0, -w),
-    (-w, 0.0, +w),
-    (-w, 0.0, -w)]
+        # Face 3 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x - w, y + 0.0, z + d),
+        (x - w, y + 0.0, z - d),
 
-def tronco_piramide(w_base, h, d_base, w_top, d_top, x=0, y=0, z=0):
-    w_base, h, d_base = w_base/2, h/2, d_base/2
-    w_top, d_top = w_top/2, d_top/2
-    return [
-    # Face 1 do tronco da Piramide (trapezio)
-    (x + w_base, y, z - d_base),
-    (x + w_top, y + h, z - d_top),
-    (x + w_top, y + h, z + d_top),
-    (x + w_base, y, z + d_base),
+        # Face 4 da Pirâmide (triângulo)
+        (x + 0.0, y + h, z + 0.0),
+        (x - w, y + 0.0, z - d),
+        (x + w, y + 0.0, z - d),
 
-    # Face 2 do tronco da Piramide (trapezio)
-    (x + w_base, y, z + d_base),
-    (x + w_top, y + h, z + d_top),
-    (x - w_top, y + h, z + d_top),
-    (x - w_base, y, z + d_base),
-
-    # Face 3 do tronco da Piramide (trapezio)
-    (x - w_base, y, z + d_base),
-    (x - w_top, y + h, z + d_top),
-    (x - w_top, y + h, z - d_top),
-    (x - w_base, y, z - d_base),
-
-    # Face 4 do tronco da Piramide (trapezio)
-    (x - w_base, y, z - d_base),
-    (x - w_top, y + h, z - d_top),
-    (x + w_top, y + h, z - d_top),
-    (x + w_base, y, z - d_base),
-
-    # Face 5 (base) do tronco da Piramide (quadrado de baixo)
-    (x + w_base, y, z + d_base),
-    (x + w_base, y, z - d_base),
-    (x - w_base, y, z + d_base),
-    (x - w_base, y, z - d_base),
-
-    # Face 6 (base) do tronco da Piramide (quadrado de cima)
-    (x + w_top, y + h, z + d_top),
-    (x + w_top, y + h, z - d_top),
-    (x - w_top, y + h, z + d_top),
-    (x - w_top, y + h, z - d_top),
+        # Face 5 (base) da Pirâmide (quadrado)
+        (x + w, y + 0.0, z + d),
+        (x + w, y + 0.0, z - d),
+        (x - w, y + 0.0, z + d),
+        (x - w, y + 0.0, z - d),
     ]
-    
-    
 
-PI = 3.141592
-r = 0.1 # raio
-H = 0.9
-num_sectors = 20 # qtd de sectors (longitude)
-num_stacks = 20 # qtd de stacks (latitude)
 
-# grid sectos vs stacks (longitude vs latitude)
-sector_step = (PI*2)/num_sectors # variar de 0 até 2π
-stack_step = H/num_stacks # variar de 0 até H
 
-# Entrada: angulo de t, altura h, raio r
-# Saida: coordenadas no cilindro
-def CoordCone(t, h, base_r, H, x, y, z, tilt_angle=0):
-    radius = base_r * (1 - h / H)  # raio diminui conforme a altura aumenta
-    x = radius * math.cos(t) + x
-    y = radius * math.sin(t) + y
-    z = h + z
-    
-    # Aplicando a inclinação no eixo Y
-    new_x = x * math.cos(tilt_angle) - z * math.sin(tilt_angle)
-    new_z = x * math.sin(tilt_angle) + z * math.cos(tilt_angle)
-    
-    return (new_x, y, new_z)
-def CoordCone(t, h, base_r, H, x, y, z, tilt_angle=0):
-    radius = base_r * (1 - h / H)  # raio diminui conforme a altura aumenta
-    x = radius * math.cos(t) + x
-    y = h + y  # Alterar para que a altura seja aplicada no eixo Y
-    z = radius * math.sin(t) + z
-    
-    # Aplicando a inclinação no eixo Z
-    new_x = x * math.cos(tilt_angle) - y * math.sin(tilt_angle)
-    new_y = x * math.sin(tilt_angle) + y * math.cos(tilt_angle)
-    
-    return (new_x, new_y, z)
+r = 0.5 # raio
 
-def cone(r, h, num_sectors, num_stacks, x=0, y=0, z=0, tilt_angle=0):
+
+
+# Entrada: angulo de longitude, latitude, raio
+# Saida: coordenadas na esfera
+def F_Esphere(u,v,r):
+    x = r*math.sin(v)*math.cos(u)
+    y = r*math.sin(v)*math.sin(u)
+    z = r*math.cos(v)
+    return (x,y,z)
+
+# vamos gerar um conjunto de vertices representantes poligonos
+# para a superficie da esfera.
+# cada poligono eh representado por dois triangulos
+def esphere(r, x=0, y=0, z=0):
+    PI = 3.141592
+    num_sectors = 32  # qtd de sectors (longitude)
+    num_stacks = 32  # qtd de stacks (latitude)
+
+    sector_step = (PI * 2) / num_sectors  # variar de 0 até 2π
+    stack_step = PI / num_stacks  # variar de 0 até π
+
     vertices_list = []
-    sector_step = 2 * math.pi / num_sectors  # Passo para os setores
-    stack_step = h / num_stacks  # Passo para as pilhas
-    
-    # Gerando as faces laterais
-    for j in range(num_stacks):
-        for i in range(num_sectors):
-            u = i * sector_step
-            v = j * stack_step
-            un = (i + 1) * sector_step if i + 1 < num_sectors else 2 * math.pi
-            vn = (j + 1) * stack_step if j + 1 < num_stacks else h
-            
-            p0 = CoordCone(u, v, r, h, x, y, z, tilt_angle)
-            p1 = CoordCone(u, vn, r, h, x, y, z, tilt_angle)
-            p2 = CoordCone(un, v, r, h, x, y, z, tilt_angle)
-            p3 = CoordCone(un, vn, r, h, x, y, z, tilt_angle)
-            
-            # Triângulo lateral
+    for i in range(0, num_sectors):  # para cada sector (longitude)
+        for j in range(0, num_stacks):  # para cada stack (latitude)
+            u = i * sector_step  # angulo setor
+            v = j * stack_step  # angulo stack
+
+            un = 0  # angulo do proximo sector
+            if i + 1 == num_sectors:
+                un = PI * 2
+            else:
+                un = (i + 1) * sector_step
+
+            vn = 0  # angulo do proximo stack
+            if j + 1 == num_stacks:
+                vn = PI
+            else:
+                vn = (j + 1) * stack_step
+
+            # vertices do poligono
+            p0 = F_Esphere(u, v, r)
+            p1 = F_Esphere(u, vn, r)
+            p2 = F_Esphere(un, v, r)
+            p3 = F_Esphere(un, vn, r)
+
+            # Adiciona deslocamento (x, y, z) a cada vértice
+            p0 = (p0[0] + x, p0[1] + y, p0[2] + z)
+            p1 = (p1[0] + x, p1[1] + y, p1[2] + z)
+            p2 = (p2[0] + x, p2[1] + y, p2[2] + z)
+            p3 = (p3[0] + x, p3[1] + y, p3[2] + z)
+
+            # triangulo 1 (primeira parte do poligono)
             vertices_list.append(p0)
             vertices_list.append(p2)
             vertices_list.append(p1)
-            
-            if vn < h:
-                vertices_list.append(p1)
-                vertices_list.append(p3)
-                vertices_list.append(p2)
-    
-    # Criando a base do cone
-    for i in range(num_sectors):
-        u = i * sector_step
-        un = (i + 1) * sector_step if i + 1 < num_sectors else 2 * math.pi
-        
-        p0 = CoordCone(u, 0, r, h, x, y, z, tilt_angle)
-        p1 = CoordCone(un, 0, r, h, x, y, z, tilt_angle)
-        center = (x, y, z)  # Centro da base no novo local
-        
-        vertices_list.append(p0)
-        vertices_list.append(p1)
-        vertices_list.append(center)
-    
-    # Adicionando o vértice do topo
-    topo = CoordCone(0, h, r, h, x, y, z, tilt_angle)
-    for i in range(num_sectors):
-        u = i * sector_step
-        un = (i + 1) * sector_step if i + 1 < num_sectors else 2 * math.pi
-        
-        p0 = CoordCone(u, h - stack_step, r, h, x, y, z, tilt_angle)
-        p1 = CoordCone(un, h - stack_step, r, h, x, y, z, tilt_angle)
-        
-        vertices_list.append(p0)
-        vertices_list.append(p1)
-        vertices_list.append(topo)
-    
+
+            # triangulo 2 (segunda e ultima parte do poligono)
+            vertices_list.append(p3)
+            vertices_list.append(p1)
+            vertices_list.append(p2)
+
     return vertices_list
