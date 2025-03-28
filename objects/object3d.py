@@ -44,7 +44,7 @@ class Object3d(object):
     def set_scale(scale):
         self.scale = scale 
 
-    def draw(self, program, loc_color):
+    def draw(self, program, loc_color, draw_type=GL_TRIANGLE_STRIP):
         cos_d_x = math.cos(self.angles[0])
         sin_d_x = math.sin(self.angles[0])
         cos_d_y = math.cos(self.angles[1])
@@ -93,5 +93,5 @@ class Object3d(object):
         for piece in self.model['color']:
             rgb = self.model['color'][piece]
             glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], 1.0) ### vermelho    
-            glDrawArrays(GL_TRIANGLE_STRIP, self.init[piece], self.len[piece])
+            glDrawArrays(draw_type, self.init[piece], self.len[piece])
     
