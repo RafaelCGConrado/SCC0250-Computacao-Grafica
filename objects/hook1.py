@@ -1,12 +1,13 @@
 from . import object3d
-from .models.hook import hook
+from .models.hook1 import hook1
 import math
-class Hook(object3d.Object3d):
+
+class Hook1(object3d.Object3d):
     def __init__(self):
         self.ocilate = 0
         super().__init__(
-            model=hook,
-            position=[0, 0.6, 0]
+            model=hook1,
+            position=[-0.3, 0.6, 0]
         )
 
     def draw(self, program, loc_color):

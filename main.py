@@ -7,7 +7,8 @@ import math
 from objects.spongebob import SpongeBob
 from objects.patrick import Patrick
 from objects.floor import Floor
-from objects.hook import Hook
+from objects.hook1 import Hook1
+from objects.hook2 import Hook2
 
 def init_window():
     glfw.init()
@@ -39,7 +40,8 @@ def load_objects():
     objects = [
         SpongeBob(),
         Patrick(),
-        Hook(),
+        Hook1(),
+        Hook2(),
         Floor()
     ]
 
