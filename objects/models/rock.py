@@ -22,10 +22,10 @@ rock = {
         "hill34": primitives.esphere(0.3, x=2.8, y=-4.2),
 
         #'monte' 4
-        "hill41": primitives.esphere(0.3, x=-3.6, y=1),
-        "hill42": primitives.esphere(0.5, x=-3.9, y=1.2),
+        "hill41": primitives.esphere(0.3, x=-3.6, y=1.4),
+        "hill42": primitives.esphere(0.5, x=-3.9, y=2.1),
         "hill43": primitives.esphere(0.4, x=-4.0, y=2.5),
-        "hill44": primitives.esphere(0.6, x=-4.3, y=2.7)
+        
     },
 
     "color": {
@@ -47,6 +47,5 @@ rock = {
         "hill41": color_rock,
         "hill42": color_rock,
         "hill43": color_rock,
-        "hill44": color_rock
     }
 }
