@@ -11,6 +11,9 @@ from objects.hook1 import Hook1
 from objects.hook2 import Hook2
 from objects.coral import Coral
 from objects.rock import Rock
+from functools import partial
+
+draw_lines = False
 
 def init_window():
     glfw.init()
@@ -54,6 +57,16 @@ def load_objects():
         vertices_list = obj.load(vertices_list)
 
     return objects, vertices_list
+
+
+def key_event(objects,window,key,scancode,action,mods):
+    global draw_lines
+
+    if key == 80:
+        draw_lines = not draw_lines
+
+    for obj in objects:
+        obj.key_event(key)
 
 def main():
     window = init_window()
@@ -111,14 +124,10 @@ def main():
 
     loc_color = glGetUniformLocation(program, "color")
     
-    def key_event(window,key,scancode,action,mods):
-        for obj in objects:
-            obj.key_event(key)
-
-    glfw.set_key_callback(window,key_event)
+    key_ev = partial(key_event, objects)
+    glfw.set_key_callback(window,key_ev)
 
     glfw.show_window(window)
-
     # ### Loop principal da janela.
 
     glEnable(GL_DEPTH_TEST) ### importante para 3D
@@ -126,6 +135,11 @@ def main():
     while not glfw.window_should_close(window):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
         glClearColor(0.2, 0.5, 1.0, 1.0)
+
+        if draw_lines:
+            glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
+        else:
+            glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
         
         for obj in objects:
             obj.draw(program, loc_color)
