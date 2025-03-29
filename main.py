@@ -13,8 +13,6 @@ from objects.coral import Coral
 from objects.rock import Rock
 from functools import partial
 
-draw_lines = False
-
 def init_window():
     glfw.init()
     glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
@@ -59,14 +57,6 @@ def load_objects():
     return objects, vertices_list
 
 
-def key_event(objects,window,key,scancode,action,mods):
-    global draw_lines
-
-    if key == 80:
-        draw_lines = not draw_lines
-
-    for obj in objects:
-        obj.key_event(key)
 
 def main():
     window = init_window()
@@ -123,7 +113,19 @@ def main():
     glVertexAttribPointer(loc_vertices, 3, GL_FLOAT, False, stride, offset)
 
     loc_color = glGetUniformLocation(program, "color")
+
+    draw_lines = False
     
+    def key_event(objects,window,key,scancode,action,mods):
+        nonlocal draw_lines
+
+        if key == 80:
+            draw_lines = not draw_lines
+
+        for obj in objects:
+            obj.key_event(key)
+
+
     key_ev = partial(key_event, objects)
     glfw.set_key_callback(window,key_ev)
 
