@@ -2,7 +2,12 @@ from . import primitives
 
 floor = {
     "vertices": {
-        "body": primitives.square(1, 1)
+        "body": [
+            (-1, -1, 0),
+            (1, -1, 0),
+            (-1, 1, 0),
+            (1, 1, 0),
+        ]
            
     },
     "color": {

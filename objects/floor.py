@@ -9,7 +9,6 @@ class Floor(Object3d):
             model=floor, 
             position=[0, -0.5, 0.5], 
             angles=[np.pi/4, 0, 0],
-            scale=2
         )
     
 
