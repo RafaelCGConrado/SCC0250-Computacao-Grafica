@@ -119,7 +119,7 @@ def main():
     def key_event(objects,window,key,scancode,action,mods):
         nonlocal draw_lines
 
-        if key == 80:
+        if key == 80 and action == glfw.PRESS:
             draw_lines = not draw_lines
 
         for obj in objects:
@@ -134,11 +134,13 @@ def main():
 
     glEnable(GL_DEPTH_TEST) ### importante para 3D
 
+    hold = True
+
     while not glfw.window_should_close(window):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
         glClearColor(0.2, 0.5, 1.0, 1.0)
 
-        if draw_lines:
+        if draw_lines and hold:
             glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
         else:
             glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
