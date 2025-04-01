@@ -9,7 +9,7 @@ from . import primitives
 #         "pants": primitives.rectangle(0.95, 0.2, 0.95, y=0.1)  
 #     },
 
-coral_color = (1,0,1)
+coral_color = (0.7,0,0.7)
 
 coral = {
     "vertices": {
@@ -29,9 +29,9 @@ coral = {
 
     "color": {
         "coral1": coral_color,
-        "coral2": coral_color,
+        "coral2": (0.5, 0, 0.5),
         "coral3": coral_color,
-        "coral4": coral_color,
+        "coral4": (0.5, 0, 0.5),
         "coral5": coral_color,
         #"coral6": coral_color
     }

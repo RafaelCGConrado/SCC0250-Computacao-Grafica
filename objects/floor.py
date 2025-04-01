@@ -6,9 +6,10 @@ from .models.floor import floor
 class Floor(Object3d):
     def __init__(self):
         super().__init__(
-            model=floor, 
-            position=[0, -0.5, 0.5], 
-            angles=[np.pi/4, 0, 0],
+            model=floor,
+            scale=1.2, 
+            position=[0, -0.6, 0.6], 
+            angles=[np.pi/3, 0, 0],
         )
     
 

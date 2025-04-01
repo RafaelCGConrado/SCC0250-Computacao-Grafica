@@ -7,7 +7,7 @@ class SpongeBob(object3d.Object3d):
     def __init__(self):
         super().__init__(
             model=sponge_bob,
-            position=[-0.5, -0.1, 0],
+            position=[-0.5, -0.1, 0.2],
             scale=0.3, 
             angles=[-np.pi/4, np.pi/4, 0]
         )
