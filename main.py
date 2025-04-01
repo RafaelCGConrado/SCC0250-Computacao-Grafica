@@ -41,12 +41,15 @@ def compile_shader(shader):
  
 def load_objects():
     objects = [
-      #  SpongeBob(),
+        SpongeBob(),
         Patrick(),
         Hook1(),
         Hook2(),
         Floor(),
         Coral(),
+        Coral(x=0.6),
+        Coral(x=1),
+        Coral(x=1.4),
         Rock()
     ]
 
@@ -138,7 +141,7 @@ def main():
 
     while not glfw.window_should_close(window):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
-        glClearColor(0.2, 0.5, 1.0, 1.0)
+        glClearColor(0.2, 0.9, 1.0, 1.0)
 
         if draw_lines and hold:
             glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)

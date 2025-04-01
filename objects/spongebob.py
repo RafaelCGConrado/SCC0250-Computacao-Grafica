@@ -7,6 +7,7 @@ class SpongeBob(object3d.Object3d):
     def __init__(self):
         super().__init__(
             model=sponge_bob,
+            position=[-0.5, -0.1, 0],
             scale=0.3, 
             angles=[-np.pi/4, np.pi/4, 0]
         )
@@ -15,8 +16,5 @@ class SpongeBob(object3d.Object3d):
         if key == 88: self.scale += 0.01
         if key == 90: self.scale -= 0.01
     
-    def draw(self, program, loc_color):
-        self.angles[1] += 0.01
-        super().draw(program, loc_color)
 
  

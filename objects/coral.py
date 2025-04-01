@@ -5,9 +5,10 @@ from .models.coral import coral
 
 
 class Coral(object3d.Object3d):
-    def __init__(self):
+    def __init__(self, x = 0, y = -0.1, z = 0):
         super().__init__(
             model=coral,
+            position=[x, y, z],
             scale=0.3, 
             angles=[-np.pi/4, np.pi/4, 0]
         )
