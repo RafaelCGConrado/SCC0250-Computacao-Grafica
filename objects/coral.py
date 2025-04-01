@@ -5,7 +5,7 @@ from .models.coral import coral
 
 
 class Coral(object3d.Object3d):
-    def __init__(self, x=0, y = -0.2, z = 0.5):
+    def __init__(self, x=0, y=0, z=0.4):
         super().__init__(
             model=coral,
             position=[x, y, z],
