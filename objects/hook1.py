@@ -7,7 +7,7 @@ class Hook1(object3d.Object3d):
         self.ocilate = 0
         super().__init__(
             model=hook1,
-            position=[-0.3, 0.6, 0]
+            position=[0, 0.6, 0]
         )
 
     def draw(self, program, loc_color):

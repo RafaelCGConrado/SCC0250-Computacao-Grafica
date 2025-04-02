@@ -9,6 +9,7 @@ from objects.patrick import Patrick
 from objects.floor import Floor
 from objects.hook1 import Hook1
 from objects.hook2 import Hook2
+from objects.hook3 import Hook3
 from objects.coral import Coral
 from objects.rock import Rock
 from functools import partial
@@ -45,6 +46,7 @@ def load_objects():
         Patrick(),
         Hook1(),
         Hook2(),
+        Hook3(),
         Floor(),
         Coral(x=-0.15),
         Coral(x=0.4),
