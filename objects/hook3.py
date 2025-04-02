@@ -11,8 +11,8 @@ class Hook3(object3d.Object3d):
         )
 
     def key_event(self, key):
-        if key == 264: self.position[1] -= 0.01
-        if key == 265: self.position[1] += 0.01
+        if key == 81: self.position[1] -= 0.01
+        if key == 65: self.position[1] += 0.01
         if self.position[1] <= 0:
             self.position[1] = 0
         elif self.position[1] >= 1.22:
