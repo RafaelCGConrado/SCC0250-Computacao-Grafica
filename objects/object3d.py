@@ -35,14 +35,11 @@ class Object3d(object):
             self.len[piece] = len(vertices_list) - self.init[piece]
         return vertices_list
 
-    def set_position(position):
-        self.position = position
-    
-    def set_angle(angle):
-        self.angles = angles
-    
-    def set_scale(scale):
-        self.scale = scale 
+    def get_center(self):
+        pieces = list(self.model['vertices'].values())
+        y_list = [v[1] for vs in pieces for v in vs]
+        return np.mean(y_list)
+
 
     def draw(self, program, loc_color, draw_type=GL_TRIANGLE_STRIP):
         cos_d_x = math.cos(self.angles[0])
@@ -75,10 +72,10 @@ class Object3d(object):
         
         mat_scale = np.array([     self.scale,  0.0, 0.0,     0, 
                                         0.0,    self.scale,   0.0, 0, 
-                                        0.0,    0.0,   0.2, 0.0, 
+                                        0.0,    0.0,   self.scale, 0.0, 
                                         0.0,    0.0,   0.0, 1.0], np.float32)
 
-        mat_position = np.array([     1,  0.0, 0.0,     self.position[0], 
+        mat_position = np.array([     1,  0.0, 0.0, self.position[0], 
                                         0.0,    1,   0.0, self.position[1], 
                                         0.0,    0.0,   1, self.position[2], 
                                         0.0,    0.0,   0.0, 1.0], np.float32)
@@ -87,6 +84,7 @@ class Object3d(object):
         self.mat_transform = multiplica_matriz(mat_rotate_x, self.mat_transform)
         self.mat_transform = multiplica_matriz(mat_scale, self.mat_transform)
         self.mat_transform = multiplica_matriz(mat_position, self.mat_transform)
+
         loc_transformation = glGetUniformLocation(program, "mat_transformation")
         glUniformMatrix4fv(loc_transformation, 1, GL_TRUE, self.mat_transform) 
         
