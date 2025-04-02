@@ -52,10 +52,10 @@ def load_objects():
         Coral(x=0.4),
         Coral(x=0.9),
         Coral(x=1.4),
-        Rock(x=-0.2, y=0.05, z=0.5, angle=0, scale=0.1),
+        Rock(x=-0.2, y=-0.1, z=0.5, angle=0, scale=0.2),
         Rock(x=-0.9, y=-0.4, z=0.2, angle=0.6, scale=0.2),
-        Rock(x=-0.1, y=-0.5, z=0, angle=0.1, scale=0.3),
-        Rock(x=0.6, y=-0.7, z=-0.5, angle=-0.8, scale=0.4),
+        Rock(x=-0.1, y=-0.5, z=0, angle=0.1, scale=0.2),
+        Rock(x=0.6, y=-0.7, z=-0.5, angle=-0.8, scale=0.2),
     ]
 
     vertices_list = []
