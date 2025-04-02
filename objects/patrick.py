@@ -17,3 +17,4 @@ class Patrick(object3d.Object3d):
     def key_event(self, key):
         if key == 262: self.angles[1] += 0.05 #esquerda
         if key == 263: self.angles[1] -= 0.05 #esquerda
+        
