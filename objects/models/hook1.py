@@ -1,11 +1,14 @@
 hook1 = {
     "vertices": {        
+        #Fio do anzol
         "thread": [
             (0.003, 1, 0),
             (-0.003, 1, 0),
             (0.003, 0, 0),
             (-0.003, 0, 0),
         ],
+
+        #Corpo (gancho) do anzol
         "body": [
             (0.01, 0, 0),
             (-0.01, 0, 0),
@@ -17,6 +20,8 @@ hook1 = {
             (-0.07, -0.2, 0),
             (-0.05, -0.17, 0),
         ],
+
+        #Isca na ponta do anzol
         "food": [
             (-0.04, -0.14, 0),
             (-0.08, -0.14, 0),
@@ -24,6 +29,8 @@ hook1 = {
             (-0.08, -0.18, 0),
         ] 
     },
+
+    #Define as cores do anzol completo
     "color" : {
         "food": (0.97,0.4, 0),
         "body": (0.3, 0.3, 0.3),

@@ -1,47 +1,65 @@
 import math
 import numpy as np
 
+
+#Retorna o conjunto de pontos que formam
+#um quadrado.
+#Parâmetros: w -> Comprimento da base (Width)
+#            h -> Comprimento da altura (height)
+#           x, y, z -> Coordenadas iniciais do objeto
 def square(w, h, x=0, y=0):
     return rectangle(w, h, 0, x, y, 0)
 
+#Retorna o conjunto de vértices que formam
+#um retângulo
+#Parâmetros: w -> Comprimento da Base
+#            h -> Altura
+#            d -> Profundidade (Depth)
+#           x,y,z -> Coordenadas iniciais do objeto
 def rectangle(w, h, d, x=0, y=0, z=0):
     w, h, d = w/2, h/2, d/2
-    return [(-w + x, -h + y, +d + z),
+    return [
+            #Face 1
+            (-w + x, -h + y, +d + z),
             (+w + x, -h + y, +d + z),
             (-w + x, +h + y, +d + z),
             (+w + x, +h + y, +d + z),
 
-            # w + xaceh + y2 dd + z Cubo
+            #Face 2
             (+w + x, -h + y, +d + z),
             (+w + x, -h + y, -d + z),         
             (+w + x, +h + y, +d + z),
             (+w + x, +h + y, -d + z),
             
-            # w + xaceh + y3 dd + z Cubo
+            #Face 3
             (+w + x, -h + y, -d + z),
             (-w + x, -h + y, -d + z),            
             (+w + x, +h + y, -d + z),
             (-w + x, +h + y, -d + z),
 
-            # w + xaceh + y4 dd + z Cubo
+            #Face 4
             (-w + x, -h + y, -d + z),
             (-w + x, -h + y, +d + z),         
             (-w + x, +h + y, -d + z),
             (-w + x, +h + y, +d + z),
 
-            # w + xaceh + y5 dd + z Cubo
+            #Face 5
             (-w + x, -h + y, -d + z),
             (+w + x, -h + y, -d + z),         
             (-w + x, -h + y, +d + z),
             (+w + x, -h + y, +d + z),
             
-            # w + xaceh + y6 dd + zubo
+            #Face 6
             (-w + x, +h + y, +d + z),
             (+w + x, +h + y, +d + z),           
             (-w + x, +h + y, -d + z),
             (+w + x, +h + y, -d + z)]
 
-
+#Retorna o conjunto de vértices que formam uma pirâmide
+#Parâmetros: w -> Comprimento da Base
+#            h -> Altura
+#            d -> Profundidade (Depth)
+#           x,y,z -> Coordenadas iniciais do objeto
 def piramid(w, h, d, x=0, y=0, z=0):
     w, h, d = w / 2, h / 2, d / 2
     return [
@@ -74,34 +92,33 @@ def piramid(w, h, d, x=0, y=0, z=0):
 
 
 
-r = 0.5 # raio
-
-
-
-# Entrada: angulo de longitude, latitude, raio
-# Saida: coordenadas na esfera
+# Retorna as coordenadas polares para gerar a esfera
+# Parâmetros: u ->angulo de longitude
+#             v -> angulo de latitude 
+#             r -> raio da esfera
 def F_Esphere(u,v,r):
     x = r*math.sin(v)*math.cos(u)
     y = r*math.sin(v)*math.sin(u)
     z = r*math.cos(v)
     return (x,y,z)
 
-# vamos gerar um conjunto de vertices representantes poligonos
-# para a superficie da esfera.
-# cada poligono eh representado por dois triangulos
+
+#Retorna o conjunto de vértices que representam a superfície da esfera
+#Parâmetros:    r -> Raio da Esfera
+#               x,y,z -> Posições iniciais da esfera
 def esphere(r, x=0, y=0, z=0):
     PI = 3.141592
-    num_sectors = 32  # qtd de sectors (longitude)
-    num_stacks = 32  # qtd de stacks (latitude)
+    num_sectors = 32  # Quantidade de sectors (longitude)
+    num_stacks = 32  # Quantidade de stacks (latitude)
 
-    sector_step = (PI * 2) / num_sectors  # variar de 0 até 2π
-    stack_step = PI / num_stacks  # variar de 0 até π
+    sector_step = (PI * 2) / num_sectors  #Variam de 0 até 2π
+    stack_step = PI / num_stacks  #Variam de 0 até π
 
     vertices_list = []
-    for i in range(0, num_sectors):  # para cada sector (longitude)
-        for j in range(0, num_stacks):  # para cada stack (latitude)
-            u = i * sector_step  # angulo setor
-            v = j * stack_step  # angulo stack
+    for i in range(0, num_sectors):  #Para cada sector (longitude)
+        for j in range(0, num_stacks):  #Para cada stack (latitude)
+            u = i * sector_step  #angulo do setor
+            v = j * stack_step  #angulo do stack
 
             un = 0  # angulo do proximo sector
             if i + 1 == num_sectors:
@@ -115,24 +132,24 @@ def esphere(r, x=0, y=0, z=0):
             else:
                 vn = (j + 1) * stack_step
 
-            # vertices do poligono
+            #Define os vértices do polígono
             p0 = F_Esphere(u, v, r)
             p1 = F_Esphere(u, vn, r)
             p2 = F_Esphere(un, v, r)
             p3 = F_Esphere(un, vn, r)
 
-            # Adiciona deslocamento (x, y, z) a cada vértice
+            #Adiciona deslocamento (x, y, z) para cada vértice
             p0 = (p0[0] + x, p0[1] + y, p0[2] + z)
             p1 = (p1[0] + x, p1[1] + y, p1[2] + z)
             p2 = (p2[0] + x, p2[1] + y, p2[2] + z)
             p3 = (p3[0] + x, p3[1] + y, p3[2] + z)
 
-            # triangulo 1 (primeira parte do poligono)
+            #Triangulo 1 (primeira parte do poligono)
             vertices_list.append(p0)
             vertices_list.append(p2)
             vertices_list.append(p1)
 
-            # triangulo 2 (segunda e ultima parte do poligono)
+            #Triangulo 2 (segunda e ultima parte do poligono)
             vertices_list.append(p3)
             vertices_list.append(p1)
             vertices_list.append(p2)

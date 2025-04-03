@@ -3,6 +3,7 @@ import abc
 from .object3d import Object3d
 from .models.floor import floor
 
+#Classe para o Chão (areia) da cena.
 class Floor(Object3d):
     def __init__(self):
         super().__init__(
@@ -12,8 +13,8 @@ class Floor(Object3d):
             angles=[np.pi/4, 0, 0],
         )
     
-
+    
     def key_event(self, key):
-        if key == 89: self.angles[0] += 0.01
+        if key == 89: self.angles[0] += 0.01 #Tecla Y -> Rotaciona o chão (APENAS PARA TESTES)
  
 

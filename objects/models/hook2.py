@@ -1,11 +1,14 @@
 hook2 = {
     "vertices": {
+        #Fio do anzol
         "thread": [
             (0.003, 1, 0),
             (-0.003, 1, 0),
             (0.003, 0, 0),
             (-0.003, 0, 0),
         ],
+
+        #Primeira parte do gancho do anzol
         "body1": [
             (0.01, 0, 0),
             (-0.01, 0, 0),
@@ -17,6 +20,8 @@ hook2 = {
             (-0.07, -0.2, 0),
             (-0.05, -0.17, 0),
         ],
+        
+        #Segunda parte do gancho do anzol 
         "body2": [
             (-0.05, -0.2, 0),
             (-0.05, -0.22, 0),
@@ -25,6 +30,8 @@ hook2 = {
             (0.07, -0.2, 0),
             (0.05, -0.17, 0),
         ],
+
+        #Corpo do peixe da isca
         "fish": [
             (0, -0.05, 0),
             (-0.1, -0.1, 0),
@@ -32,12 +39,16 @@ hook2 = {
             (0.1, -0.1, 0),
             (0, -0.05, 0),
         ],
+        
+        #Nadadeira do peixe da isca
         "tail": [
             (0.12, -0.12, 0),
             (0.12, -0.07, 0),
             (0.1, -0.1, 0),
         ]
     },
+
+    #Cores do objeto completo
     "color" : {
         "fish": (1, 0, 0),
         "tail": (1, 0, 0),

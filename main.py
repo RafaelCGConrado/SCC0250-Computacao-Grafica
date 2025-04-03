@@ -40,7 +40,9 @@ def compile_shader(shader):
         print(error)
         raise RuntimeError(f"Erro de compilacao do {vertex} Shader")
  
+#Carrega os objetos que serão utilizados/exibidos na cena
 def load_objects():
+    #Todos os objetos que compõe a cena
     objects = [
         SpongeBob(),
         Patrick(),
@@ -85,16 +87,18 @@ def main():
             }
             """
 
-    # Request a program and shader slots from GPU
+    #Requisita slots na GPU para o programa e shaders
     program = glCreateProgram()
     
+    #Cria shaders para vertex e fragments
     vertex = create_shader(vertex_code, GL_VERTEX_SHADER)
     fragment = create_shader(fragment_code, GL_FRAGMENT_SHADER)
     
+    #Compila os shaders criados anteriormente
     compile_shader(vertex)
     compile_shader(fragment)
 
-    # Attach shader objects to the program
+    # Liga os shaders ao programa criado
     glAttachShader(program, vertex)
     glAttachShader(program, fragment)
 
@@ -104,13 +108,13 @@ def main():
         raise RuntimeError('Linking error')
     glUseProgram(program)
 
-    # Load objects and vertices list
+    # Carrega objetos e listas de vértices
     objects, vertices_list = load_objects()
 
     vertices = np.zeros(len(vertices_list), [("position", np.float32, 3)])
     vertices['position'] = vertices_list
     
-    # Upload data
+    # Upload dos dados para a GPU
     buffer_VBO = glGenBuffers(1)
     glBindBuffer(GL_ARRAY_BUFFER, buffer_VBO)
     glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
@@ -127,6 +131,7 @@ def main():
     def key_event(objects,window,key,scancode,action,mods):
         nonlocal draw_lines
 
+        #Tecla P -> Exibe na tela as malhas dos objetos
         if key == 80 and action == glfw.PRESS:
             draw_lines = not draw_lines
 
