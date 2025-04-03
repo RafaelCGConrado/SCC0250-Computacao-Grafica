@@ -6,11 +6,20 @@ import abc
 
 #Classe para desenhar todos os Objetos 3D que compõe a cena
 class Object3d(object):
+    # Parâmetros
+    #   model: dicionário com os vértices do modelo
+    #   position: posição inicial do modelo
+    #   angles: ângulos do objeto
+    #   scale: escala do objeto
     def __init__(self, model, position=[0, 0, 0], angles=[0, 0, 0], scale=1):    
         self.model = model
 
-        self.init = {x: 0 for x in self.model}
+        # Vértices iniciais das partes do modelo
+        self.init = {x: 0 for x in self.model} 
+
+        # Quantidade de vértices nas partes dos modelos
         self.len = {x: 0 for x in self.model}
+
         self.angles = angles.copy()
         self.position = position.copy()
         self.scale = scale
@@ -24,12 +33,19 @@ class Object3d(object):
             0, 0, 0, 1
         ], np.float32)
 
+    # Classe abstrata para os eventos de teclado de cada objeto.
+    # Parâmetros:
+    #   key: variável do glfw que possui o código do botão pressionado.
     @abc.abstractmethod
     def key_event(self, key):
         return
 
     #'Carrega' o objeto a partir da lista de vértices que o compõe
     def load(self, vertices_list):
+        # Cada pedaço do modelo possui sua lista de vértices.
+        # O loop passará por cada uma dessas partes e transfere
+        # seus vértices para a lista principal de vértices de 
+        # renderização.
         for piece in self.model['vertices']:        
             self.init[piece] = len(vertices_list)
 
@@ -99,12 +115,13 @@ class Object3d(object):
         self.mat_transform = multiplica_matriz(mat_scale, self.mat_transform)
         self.mat_transform = multiplica_matriz(mat_position, self.mat_transform)
 
+        # Transfere a matriz final de transformação do vertex shader
         loc_transformation = glGetUniformLocation(program, "mat_transformation")
         glUniformMatrix4fv(loc_transformation, 1, GL_TRUE, self.mat_transform) 
         
         #Desenha os objetos na cor desejada
         for piece in self.model['color']:
             rgb = self.model['color'][piece]
-            glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], 1.0) ### vermelho    
+            glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], 1.0)     
             glDrawArrays(draw_type, self.init[piece], self.len[piece])
     
