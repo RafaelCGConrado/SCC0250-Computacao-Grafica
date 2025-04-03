@@ -4,8 +4,7 @@ import math
 from .utils import multiplica_matriz
 import abc
 
-
-# Classe base para a criação de objetos
+#Classe para desenhar todos os Objetos 3D que compõe a cena
 class Object3d(object):
     # Parâmetros
     #   model: dicionário com os vértices do modelo
@@ -25,7 +24,8 @@ class Object3d(object):
         self.position = position.copy()
         self.scale = scale
 
-        # Matriz inicial de transformação
+        #Cada objeto possui sua própria matriz de transformação
+        # que é iniciada como uma matriz identidade
         self.mat_transform = np.array([
             1, 0, 0, 0,
             0, 1, 0, 0,
@@ -40,9 +40,7 @@ class Object3d(object):
     def key_event(self, key):
         return
 
-    # Carrega os vétices para a lista de vértices de renderização
-    # Parâmtros:
-    #   vertices_list: lista de vértices que serão passados para serem exibidos
+    #'Carrega' o objeto a partir da lista de vértices que o compõe
     def load(self, vertices_list):
         # Cada pedaço do modelo possui sua lista de vértices.
         # O loop passará por cada uma dessas partes e transfere
@@ -56,18 +54,16 @@ class Object3d(object):
 
             self.len[piece] = len(vertices_list) - self.init[piece]
         return vertices_list
-    
-    # Retorna a posição central do objetos
+
+    #Determina o centroide do objeto
     def get_center(self):
         pieces = list(self.model['vertices'].values())
         y_list = [v[1] for vs in pieces for v in vs]
         return np.mean(y_list)
 
-    # Renderiza o objeto, aplicando as transformações necessárias.
-    # Parâmetros: 
-    #   program: programa opengl alocado na gpu.
-    #   loc_color: localização da variável de cor no fragment shader.
-    #   draw_type: tipo de renderização dos polígonos.
+    #Desenha o objeto na cena a partir das definicoes anteriores
+    #Utilizamos GL_TRIANGLE_STRIP para desenhar o objeto por meio
+    #de triangulos menores
     def draw(self, program, loc_color, draw_type=GL_TRIANGLE_STRIP):
         cos_d_x = math.cos(self.angles[0])
         sin_d_x = math.sin(self.angles[0])
@@ -76,6 +72,7 @@ class Object3d(object):
         cos_d_z = math.cos(self.angles[2])
         sin_d_z = math.sin(self.angles[2])
         
+        #Define a matriz de rotação do objeto no eixo Z
         mat_rotate_z = np.array([
             cos_d_z, -sin_d_z, 0, 0,
             sin_d_z, cos_d_z, 0, 0,
@@ -83,6 +80,7 @@ class Object3d(object):
             0, 0, 0, 1,
         ], np.float32)
         
+        #Matriz de Rotação ao redor do eixo Y
         mat_rotate_y = np.array([
             cos_d_y, 0, -sin_d_y, 0,
             0, 1, 0, 0,
@@ -90,6 +88,7 @@ class Object3d(object):
             0, 0, 0, 1,
         ], np.float32)
 
+        #Matriz de rotação ao redor de X
         mat_rotate_x = np.array([
             1, 0, 0, 0,
             0, cos_d_x, -sin_d_x, 0,
@@ -97,20 +96,20 @@ class Object3d(object):
             0, 0, 0, 1,
         ], np.float32)
         
-        mat_scale = np.array([  
-            self.scale, 0.0,    0.0,    0, 
-            0.0,    self.scale, 0.0,    0, 
-            0.0,    0.0,    self.scale, 0.0, 
-            0.0,    0.0,    0.0, 1.0
-        ], np.float32)
+        #Matriz de Escala do objeto
+        mat_scale = np.array([     self.scale,  0.0, 0.0,     0, 
+                                        0.0,    self.scale,   0.0, 0, 
+                                        0.0,    0.0,   self.scale, 0.0, 
+                                        0.0,    0.0,   0.0, 1.0], np.float32)
 
-        mat_position = np.array([   
-            1,      0.0,    0.0,    self.position[0], 
-            0.0,    1,      0.0,    self.position[1], 
-            0.0,    0.0,    1,      self.position[2], 
-            0.0,    0.0,   0.0,     1.0
-        ], np.float32)
+        #Matriz de translação para a posição inicial do objeto
+        mat_position = np.array([     1,  0.0, 0.0, self.position[0], 
+                                        0.0,    1,   0.0, self.position[1], 
+                                        0.0,    0.0,   1, self.position[2], 
+                                        0.0,    0.0,   0.0, 1.0], np.float32)
 
+        #Realiza a multiplicação das matrizes e transforma o objeto
+        #até a posicao desejada
         self.mat_transform = multiplica_matriz(mat_rotate_y, mat_rotate_z)
         self.mat_transform = multiplica_matriz(mat_rotate_x, self.mat_transform)
         self.mat_transform = multiplica_matriz(mat_scale, self.mat_transform)
@@ -120,7 +119,7 @@ class Object3d(object):
         loc_transformation = glGetUniformLocation(program, "mat_transformation")
         glUniformMatrix4fv(loc_transformation, 1, GL_TRUE, self.mat_transform) 
         
-        # Irá colorir cada pedaço do modelo.
+        #Desenha os objetos na cor desejada
         for piece in self.model['color']:
             rgb = self.model['color'][piece]
             glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], 1.0)     

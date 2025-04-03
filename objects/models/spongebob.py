@@ -16,13 +16,13 @@ from . import primitives
 
 sponge_bob = {
     "vertices": {
-        "body": primitives.rectangle(1, 1.2, 0.4, y=0.2),
-        "arm1": primitives.rectangle(0.1, 0.8, 0.1, x=-0.55, y=-0.2),
-        "arm2": primitives.rectangle(0.1, 0.8, 0.1, x=0.55, y=-0.2),
-        "leg1": primitives.rectangle(0.1, 0.8, 0.1, x=0.25, y=-1),
-        "leg2": primitives.rectangle(0.1, 0.8, 0.1, x=-0.25, y=-1),
-        "pants1": primitives.rectangle(1, 0.1, 0.4, y=-0.45),
-        "pants2": primitives.rectangle(1, 0.2, 0.4, y=-0.6),
+        "body": primitives.rectangle(1, 1.2, 0.4, y=0.2), #corpo (tronco)
+        "arm1": primitives.rectangle(0.1, 0.8, 0.1, x=-0.55, y=-0.2), #braço esquerdo
+        "arm2": primitives.rectangle(0.1, 0.8, 0.1, x=0.55, y=-0.2), #braço direito
+        "leg1": primitives.rectangle(0.1, 0.8, 0.1, x=0.25, y=-1), #perna esquerda
+        "leg2": primitives.rectangle(0.1, 0.8, 0.1, x=-0.25, y=-1), #perna direita
+        "pants1": primitives.rectangle(1, 0.1, 0.4, y=-0.45), #calca1 -> parte branca da camisa
+        "pants2": primitives.rectangle(1, 0.2, 0.4, y=-0.6), #calca2 -> parte marrom da calça
     },
 
     "color": {

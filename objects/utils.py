@@ -1,5 +1,8 @@
 import numpy as np
 
+#Realiza a multiplicação de duas matrizes a e b
+#É importante para realizar todas as transformações (rotacao e translacao)
+#dos objetos da cena.
 def multiplica_matriz(a,b):
     m_a = a.reshape(4,4)
     m_b = b.reshape(4,4)

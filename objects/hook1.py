@@ -2,6 +2,9 @@ from . import object3d
 from .models.hook1 import hook1
 import math
 
+#Classe para o anzol 1 da cena.
+#Ele oscila (sobe e desce) continuamente e não é
+#controlável pelo usuário.
 class Hook1(object3d.Object3d):
     def __init__(self):
         self.ocilate = 0

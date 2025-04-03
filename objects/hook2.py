@@ -2,6 +2,9 @@ from . import object3d
 from .models.hook2 import hook2
 import math
 
+#Classe para o segundo anzol da cena. Apesar de sua aparência
+#ser diferente do primeiro, ele também oscila continuamente
+#sem interferência do usuário.
 class Hook2(object3d.Object3d):
     def __init__(self):
         self.ocilate = 0
