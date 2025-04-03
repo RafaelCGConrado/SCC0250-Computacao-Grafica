@@ -11,6 +11,7 @@ from objects.hook1 import Hook1
 from objects.hook2 import Hook2
 from objects.hook3 import Hook3
 from objects.coral import Coral
+from objects.bubble import Bubble
 from objects.rock import Rock
 from objects.flower import Flower
 from functools import partial
@@ -63,7 +64,8 @@ def load_objects():
         Flower(x=0.7, y=0.9, z=0, color=(1.0, 0.0, 0.0)),
         Flower(x=-0.9, y=0.5, z=0, color=(0.0, 0.0, 1.0)),
         Flower(x=-1, y=0.95, z=0, color=(0.5, 1.0, 0.0)),
-        Flower(x=-0.6, y=0.8, z=0, color=(1.0, 0.0, 0.0))
+        Flower(x=-0.6, y=0.8, z=0, color=(1.0, 0.0, 0.0)),
+        Bubble()
     ]
 
     vertices_list = []
@@ -152,10 +154,18 @@ def main():
     # ### Loop principal da janela.
 
     glEnable(GL_DEPTH_TEST) ### importante para 3D
-
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    
     hold = True
+    lastFrame = 0
 
     while not glfw.window_should_close(window):
+        currentFrame = glfw.get_time()
+        deltaTime = currentFrame - lastFrame
+        lastFrame = currentFrame
+        
+        glfw.poll_events()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
         glClearColor(0.2, 0.9, 1.0, 1.0)
 
@@ -168,7 +178,6 @@ def main():
             obj.draw(program, loc_color)
         
         glfw.swap_buffers(window)
-        glfw.poll_events()
 
     glfw.terminate()
 

@@ -90,7 +90,14 @@ def piramid(w, h, d, x=0, y=0, z=0):
         (x - w, y + 0.0, z - d),
     ]
 
-
+def circle(r, x=0, y=0):
+    angles = 8
+    verticies = []
+    for angle in np.arange(0, 2*np.pi + 1, 2*np.pi/angles):
+        x_ang = r*math.cos(angle) + x
+        y_ang = r*math.sin(angle) + y
+        verticies.append([x_ang, y_ang, 0])
+    return verticies
 
 # Retorna as coordenadas polares para gerar a esfera
 # Parâmetros: u ->angulo de longitude

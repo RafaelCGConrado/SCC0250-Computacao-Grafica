@@ -122,6 +122,7 @@ class Object3d(object):
         #Desenha os objetos na cor desejada
         for piece in self.model['color']:
             rgb = self.model['color'][piece]
-            glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], 1.0)     
+            alpha = rgb[3] if len(rgb) == 4 else 1.0
+            glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], alpha)     
             glDrawArrays(draw_type, self.init[piece], self.len[piece])
     
