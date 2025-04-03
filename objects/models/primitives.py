@@ -155,3 +155,20 @@ def esphere(r, x=0, y=0, z=0):
             vertices_list.append(p2)
 
     return vertices_list
+
+import math 
+def flower_body(size, x=0, y=0, z=0):
+    num_points = 10  # 5 pontas e 5 bases
+    angle = math.pi / 2  # Começa no topo
+    vertices_list = []
+    
+    for i in range(num_points):
+        radius = size if i % 2 == 0 else size / 2.5  # Alterna entre ponta e base
+        px = x + radius * math.cos(angle)
+        py = y + radius * math.sin(angle)
+        vertices_list.append((px, py, z))
+        angle += math.pi / 5  # Incremento do ângulo
+
+    # Adiciona o último vértice para fechar a forma no GL_TRIANGLE_STRIP
+    vertices_list.append(vertices_list[0])  # Conecta ao primeiro vértice
+    return vertices_list

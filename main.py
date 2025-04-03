@@ -12,6 +12,7 @@ from objects.hook2 import Hook2
 from objects.hook3 import Hook3
 from objects.coral import Coral
 from objects.rock import Rock
+from objects.flower import Flower
 from functools import partial
 
 def init_window():
@@ -58,6 +59,11 @@ def load_objects():
         Rock(x=-0.9, y=-0.4, z=0.2, angle=0.6, scale=0.2),
         Rock(x=-0.1, y=-0.5, z=0, angle=0.1, scale=0.2),
         Rock(x=0.6, y=-0.7, z=-0.5, angle=-0.8, scale=0.2),
+        Flower(x=0.1, y=0.8, z=0),
+        Flower(x=0.7, y=0.9, z=0),
+        Flower(x=-0.9, y=0.5, z=0),
+        Flower(x=-1, y=0.95, z=0),
+        Flower(x=-0.6, y=0.8, z=0)
     ]
 
     vertices_list = []
