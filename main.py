@@ -59,11 +59,11 @@ def load_objects():
         Rock(x=-0.9, y=-0.4, z=0.2, angle=0.6, scale=0.2),
         Rock(x=-0.1, y=-0.5, z=0, angle=0.1, scale=0.2),
         Rock(x=0.6, y=-0.7, z=-0.5, angle=-0.8, scale=0.2),
-        Flower(x=0.1, y=0.8, z=0),
-        Flower(x=0.7, y=0.9, z=0),
-        Flower(x=-0.9, y=0.5, z=0),
-        Flower(x=-1, y=0.95, z=0),
-        Flower(x=-0.6, y=0.8, z=0)
+        Flower(x=0.1, y=0.8, z=0, color=(0.5, 1.0, 0.0)),
+        Flower(x=0.7, y=0.9, z=0, color=(1.0, 0.0, 0.0)),
+        Flower(x=-0.9, y=0.5, z=0, color=(0.0, 0.0, 1.0)),
+        Flower(x=-1, y=0.95, z=0, color=(0.5, 1.0, 0.0)),
+        Flower(x=-0.6, y=0.8, z=0, color=(1.0, 0.0, 0.0))
     ]
 
     vertices_list = []

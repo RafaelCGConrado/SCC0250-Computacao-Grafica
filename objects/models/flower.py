@@ -6,6 +6,6 @@ flower = {
     },
 
     "color": {
-        "body": (0.5, 1.0, 0.0)
+        "body": None
     }
 }
