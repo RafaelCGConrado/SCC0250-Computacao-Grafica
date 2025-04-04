@@ -9,7 +9,7 @@ class Floor(Object3d):
         super().__init__(
             model=floor,
             scale=2, 
-            position=[0, -0.8, 0], 
+            position=[0, 0.2, 1], 
             angles=[np.pi/4, 0, 0],
         )
     

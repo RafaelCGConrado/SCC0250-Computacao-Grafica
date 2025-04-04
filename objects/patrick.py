@@ -10,7 +10,7 @@ class Patrick(object3d.Object3d):
         super().__init__(
             model=patrick,
             scale=0.3, 
-            position=[0.5, -0.2, 0],
+            position=[0.5, -0.2, 0.2],
             angles=[-np.pi/4, -np.pi/4, 0]
         )
 
