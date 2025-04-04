@@ -14,15 +14,21 @@ class SpongeBob(object3d.Object3d):
             angles=[-np.pi/4, np.pi/4, 0]
         )
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     def key_event(self, key, delta_time):
+=======
+    def key_event(self, key):
+>>>>>>> parent of 651dcc6 (delta_time)
         if key == 88: #Tecla X -> Aumenta de tamanho
-            self.scale += 1*delta_time
-            self.position[1] += 1*delta_time
+            self.scale += 0.01
+            self.position[1] += 0.01
         if key == 90:  #Tecla Z -> Diminui de tamanho
-            self.scale -= 1*delta_time
-            self.position[1] -= 1*delta_time
+            self.scale -= 0.01
+            self.position[1] -= 0.01
+
+        print(self.position[1])
 
 =======
 >>>>>>> parent of c4a0ded (More z ajustments and limit spongebob scale)

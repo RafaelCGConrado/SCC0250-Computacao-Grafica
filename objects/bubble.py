@@ -14,12 +14,12 @@ class Bubble(object3d.Object3d):
             model=bubble,
             position=[np.random.uniform(-1, 1), np.random.uniform(-1, 1), -1],
         )
-    def draw(self, program, loc_color, delta_time):
-        self.position[1] += self.velocity*delta_time
-        self.x_vary += delta_time*5
+    def draw(self, program, loc_color):
+        self.position[1] += self.velocity
+        self.x_vary += 0.1
         if self.position[1] >= 1.5:
             self.position[1] = -1
             self.position[0] = np.random.uniform(-1, 1)
-        self.position[0] += 0.01*np.sin(self.x_vary + self.position[1]) 
-        super().draw(program, loc_color, delta_time=delta_time, draw_type=GL_TRIANGLE_FAN)
+        self.position[0] += 0.005*np.sin(self.x_vary + self.velocity) 
+        super().draw(program, loc_color, draw_type=GL_TRIANGLE_FAN)
 
