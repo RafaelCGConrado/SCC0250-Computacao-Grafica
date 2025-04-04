@@ -15,11 +15,11 @@ class Bubble(object3d.Object3d):
             position=[np.random.uniform(-1, 1), np.random.uniform(-1, 1), -1],
         )
     def draw(self, program, loc_color, delta_time):
-        self.position[1] += self.velocity
-        self.x_vary += 0.1
+        self.position[1] += self.velocity*delta_time
+        self.x_vary += 2*delta_time
         if self.position[1] >= 1.5:
             self.position[1] = -1
             self.position[0] = np.random.uniform(-1, 1)
-        self.position[0] += 0.005*np.sin(self.x_vary + self.velocity) 
+        self.position[0] += 0.005*np.sin(self.x_vary) 
         super().draw(program, loc_color, delta_time, draw_type=GL_TRIANGLE_FAN)
 

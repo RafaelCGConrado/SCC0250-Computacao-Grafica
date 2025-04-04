@@ -14,7 +14,7 @@ class Hook2(object3d.Object3d):
         )
 
     def draw(self, program, loc_color, delta_time):
-        self.ocilate += 0.01
+        self.ocilate += delta_time
         self.position[1] = math.sin(self.ocilate + 0.5)/10 + 0.3
         super().draw(program, loc_color, delta_time)
 
