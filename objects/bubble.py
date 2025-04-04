@@ -12,7 +12,7 @@ class Bubble(object3d.Object3d):
         self.velocity = velocity
         super().__init__(
             model=bubble,
-            position=[np.random.uniform(-1, 1), np.random.uniform(-1, 1), -0.9],
+            position=[np.random.uniform(-1, 1), np.random.uniform(-1, 1), -1],
         )
     def draw(self, program, loc_color):
         self.position[1] += self.velocity

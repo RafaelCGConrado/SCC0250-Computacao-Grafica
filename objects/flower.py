@@ -1,3 +1,4 @@
+from OpenGL.GL import *
 import numpy as np
 import abc
 from . import object3d
@@ -20,6 +21,8 @@ class Flower(object3d.Object3d):
             position=[x, y, z],
             angles=[-np.pi/4, -0.0353, 0]
         )
+    def draw(self, program, loc_color):
+        super().draw(program, loc_color, draw_type=GL_LINE_STRIP)
 
             
     
