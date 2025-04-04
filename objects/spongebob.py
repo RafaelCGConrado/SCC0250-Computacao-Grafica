@@ -22,7 +22,7 @@ class SpongeBob(object3d.Object3d):
             self.scale -= 0.01
             self.position[1] -= 0.01
 
-        print(self.position[1])
+        # print(self.position[1])
 
         #Abaixo, definimos limites para aumento e diminuição do objeto.
         #Não queremos que ele fique grande demais (e ocupe toda a cena) 
