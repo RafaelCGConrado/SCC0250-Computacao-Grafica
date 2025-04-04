@@ -14,15 +14,14 @@ class SpongeBob(object3d.Object3d):
             angles=[-np.pi/4, np.pi/4, 0]
         )
 
-    def key_event(self, key):
-        if key == 88: #Tecla X -> Aumenta de tamanho
-            self.scale += 0.01
-            self.position[1] += 0.01
-        if key == 90:  #Tecla Z -> Diminui de tamanho
-            self.scale -= 0.01
-            self.position[1] -= 0.01
 
-        print(self.position[1])
+    def key_event(self, key, delta_time):
+        if key == 88: #Tecla X -> Aumenta de tamanho
+            self.scale += 1*delta_time
+            self.position[1] += 1*delta_time
+        if key == 90:  #Tecla Z -> Diminui de tamanho
+            self.scale -= 1*delta_time
+            self.position[1] -= 1*delta_time
 
         #Abaixo, definimos limites para aumento e diminuição do objeto.
         #Não queremos que ele fique grande demais (e ocupe toda a cena) 

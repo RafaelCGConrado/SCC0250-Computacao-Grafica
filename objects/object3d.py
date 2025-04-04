@@ -37,7 +37,7 @@ class Object3d(object):
     # Parâmetros:
     #   key: variável do glfw que possui o código do botão pressionado.
     @abc.abstractmethod
-    def key_event(self, key):
+    def key_event(self, key, delta_time=1):
         return
 
     #'Carrega' o objeto a partir da lista de vértices que o compõe
@@ -64,7 +64,7 @@ class Object3d(object):
     #Desenha o objeto na cena a partir das definicoes anteriores
     #Utilizamos GL_TRIANGLE_STRIP para desenhar o objeto por meio
     #de triangulos menores
-    def draw(self, program, loc_color, draw_type=GL_TRIANGLE_STRIP):
+    def draw(self, program, loc_color, draw_type=GL_TRIANGLE_STRIP, delta_time=1):
         cos_d_x = math.cos(self.angles[0])
         sin_d_x = math.sin(self.angles[0])
         cos_d_y = math.cos(self.angles[1])

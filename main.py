@@ -65,11 +65,11 @@ def load_objects():
         Flower(x=-0.9, y=0.5, z=0, color=(0.0, 0.0, 1.0)),
         Flower(x=-1, y=0.95, z=0, color=(0.5, 1.0, 0.0)),
         Flower(x=-0.6, y=0.8, z=0, color=(1.0, 0.0, 0.0)),
-        Bubble(0.014),
-        Bubble(0.012),
-        Bubble(0.019),
-        Bubble(0.014),
-        Bubble(0.01),
+        Bubble(0.6),
+        Bubble(1),
+        Bubble(1.2),
+        Bubble(1.4),
+        Bubble(0.7),
     ]
 
     vertices_list = []
@@ -140,15 +140,16 @@ def main():
 
     draw_lines = False
     
+    deltaTime = 0
     def key_event(objects,window,key,scancode,action,mods):
-        nonlocal draw_lines
+        nonlocal draw_lines, deltaTime
 
         #Tecla P -> Exibe na tela as malhas dos objetos
         if key == 80 and action == glfw.PRESS:
             draw_lines = not draw_lines
 
         for obj in objects:
-            obj.key_event(key)
+            obj.key_event(key, deltaTime)
 
 
     key_ev = partial(key_event, objects)
@@ -179,7 +180,7 @@ def main():
             glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
         
         for obj in objects:
-            obj.draw(program, loc_color)
+            obj.draw(program, loc_color, delta_time=deltaTime)
         
         glfw.swap_buffers(window)
 
