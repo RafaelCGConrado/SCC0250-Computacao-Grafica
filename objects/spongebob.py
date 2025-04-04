@@ -14,13 +14,13 @@ class SpongeBob(object3d.Object3d):
             angles=[-np.pi/4, np.pi/4, 0]
         )
 
-    def key_event(self, key):
+    def key_event(self, key, delta_time):
         if key == 88: #Tecla X -> Aumenta de tamanho
-            self.scale += 0.01
-            self.position[1] += 0.01
+            self.scale += delta_time
+            self.position[1] += delta_time
         if key == 90:  #Tecla Z -> Diminui de tamanho
-            self.scale -= 0.01
-            self.position[1] -= 0.01
+            self.scale -= delta_time
+            self.position[1] -= 0.01*delta_time
 
         # print(self.position[1])
 

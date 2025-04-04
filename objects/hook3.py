@@ -12,7 +12,7 @@ class Hook3(object3d.Object3d):
             position=[-0.3, 0.6, 0]
         )
 
-    def key_event(self, key):
+    def key_event(self, key, delta_time):
         if key == 65: self.position[1] -= 0.01 #Tecla A -> Desce o anzol no eixo Y
         if key == 81: self.position[1] += 0.01 #Tecla Q -> Sobe o anzol no eixo Y
         

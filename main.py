@@ -139,16 +139,17 @@ def main():
     loc_color = glGetUniformLocation(program, "color")
 
     draw_lines = False
-    
+    delta_time = 0
+
     def key_event(objects,window,key,scancode,action,mods):
-        nonlocal draw_lines
+        nonlocal draw_lines, delta_time
 
         #Tecla P -> Exibe na tela as malhas dos objetos
         if key == 80 and action == glfw.PRESS:
             draw_lines = not draw_lines
 
         for obj in objects:
-            obj.key_event(key)
+            obj.key_event(key, delta_time)
 
 
     key_ev = partial(key_event, objects)
@@ -166,7 +167,7 @@ def main():
 
     while not glfw.window_should_close(window):
         currentFrame = glfw.get_time()
-        deltaTime = currentFrame - lastFrame
+        delta_time = currentFrame - lastFrame
         lastFrame = currentFrame
         
         glfw.poll_events()
@@ -179,7 +180,7 @@ def main():
             glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
         
         for obj in objects:
-            obj.draw(program, loc_color)
+            obj.draw(program, loc_color, delta_time=delta_time)
         
         glfw.swap_buffers(window)
 
