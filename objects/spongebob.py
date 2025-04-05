@@ -20,7 +20,7 @@ class SpongeBob(object3d.Object3d):
             self.position[1] += delta_time
         if key == 90:  #Tecla Z -> Diminui de tamanho
             self.scale -= delta_time
-            self.position[1] -= 0.01*delta_time
+            self.position[1] -= delta_time
 
         # print(self.position[1])
 
