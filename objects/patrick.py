@@ -27,7 +27,18 @@ class Patrick(object3d.Object3d):
         #Limite no eixo Y
         if self.position[1] >= 0:
             self.position[1] = 0
+        if self.position[1] <= -0.8:
+            self.position[1] = -0.8
+        # Limites no eixo X
+        if self.position[0] <= -1:
+            self.position[0] = -1
+        if self.position[0] >= 1:
+            self.position[0] = -1
 
-        #Caso ultrapasse o limite no eixo Z
+        #Caso ultrapasse os limites no eixo Z
         if self.position[2] >= 0:
             self.position[2] = 0
+        if self.position[2] <= -0.6:
+            self.position[2] = -0.6
+        
+
