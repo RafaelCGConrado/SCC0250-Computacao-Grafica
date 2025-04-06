@@ -13,16 +13,15 @@ class Object3d(object):
     #   scale: escala do objeto
     def __init__(self, model, position=[0, 0, 0], angles=[0, 0, 0], scale=1):    
         self.model = model
+        self.position = position.copy()
+        self.angles = angles.copy()
+        self.scale = scale
 
         # Vértices iniciais das partes do modelo
-        self.init = {x: 0 for x in self.model} 
+        self.init = {}
 
         # Quantidade de vértices nas partes dos modelos
-        self.len = {x: 0 for x in self.model}
-
-        self.angles = angles.copy()
-        self.position = position.copy()
-        self.scale = scale
+        self.len = {}
 
         #Cada objeto possui sua própria matriz de transformação
         # que é iniciada como uma matriz identidade
@@ -97,20 +96,24 @@ class Object3d(object):
         ], np.float32)
         
         #Matriz de Escala do objeto
-        mat_scale = np.array([     self.scale,  0.0, 0.0,     0, 
-                                        0.0,    self.scale,   0.0, 0, 
-                                        0.0,    0.0,   self.scale, 0.0, 
-                                        0.0,    0.0,   0.0, 1.0], np.float32)
+        mat_scale = np.array([
+            self.scale, 0, 0, 0, 
+            0, self.scale, 0, 0, 
+            0, 0, self.scale, 0, 
+            0, 0, 0, 1,
+        ], np.float32)
 
         #Matriz de translação para a posição inicial do objeto
-        mat_position = np.array([     1,  0.0, 0.0, self.position[0], 
-                                        0.0,    1,   0.0, self.position[1], 
-                                        0.0,    0.0,   1, self.position[2], 
-                                        0.0,    0.0,   0.0, 1.0], np.float32)
+        mat_position = np.array([     
+            1, 0, 0, self.position[0], 
+            0, 1, 0, self.position[1], 
+            0, 0, 1, self.position[2], 
+            0, 0, 0, 1
+        ], np.float32)
 
         #Realiza a multiplicação das matrizes e transforma o objeto
         #até a posicao desejada
-        self.mat_transform = multiplica_matriz(mat_rotate_y, mat_rotate_z)
+        self.mat_transform = multiplica_matriz(mat_rotate_z, mat_rotate_y)
         self.mat_transform = multiplica_matriz(mat_rotate_x, self.mat_transform)
         self.mat_transform = multiplica_matriz(mat_scale, self.mat_transform)
         self.mat_transform = multiplica_matriz(mat_position, self.mat_transform)
@@ -122,7 +125,7 @@ class Object3d(object):
         #Desenha os objetos na cor desejada
         for piece in self.model['color']:
             rgb = self.model['color'][piece]
-            alpha = rgb[3] if len(rgb) == 4 else 1.0
+            alpha = rgb[3] if len(rgb) == 4 else 1
             glUniform4f(loc_color, rgb[0], rgb[1], rgb[2], alpha)     
             glDrawArrays(draw_type, self.init[piece], self.len[piece])
     
