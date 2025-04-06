@@ -167,7 +167,6 @@ def main():
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
     
-    hold = True
     lastFrame = 0
 
     while not glfw.window_should_close(window):
@@ -179,7 +178,7 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
         glClearColor(0.2, 0.9, 1.0, 1.0)
 
-        if draw_lines and hold:
+        if draw_lines:
             glPolygonMode(GL_FRONT_AND_BACK,GL_LINE)
         else:
             glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
