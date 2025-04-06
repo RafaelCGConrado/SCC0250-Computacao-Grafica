@@ -144,6 +144,10 @@ def main():
 
     def key_event(objects,window,key,scancode,action,mods):
         nonlocal draw_lines, delta_time
+        
+        #Tecla ESC -> Fecha o jogo
+        if key == glfw.KEY_ESCAPE and action == glfw.PRESS:
+            glfw.set_window_should_close(window, True)
 
         #Tecla P -> Exibe na tela as malhas dos objetos
         if key == 80 and action == glfw.PRESS:

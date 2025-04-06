@@ -24,11 +24,12 @@ class Patrick(object3d.Object3d):
             self.position[2] += 0.01*np.sin(self.angles[1] - np.pi/2)
         
         #Limita o movimento do Patrick para que ele não avance sobre os limites da cena
-        #Limite no eixo Y
+        #Limites no eixo Y
         if self.position[1] >= 0:
             self.position[1] = 0
         if self.position[1] <= -0.8:
             self.position[1] = -0.8
+
         # Limites no eixo X
         if self.position[0] <= -1:
             self.position[0] = -1
